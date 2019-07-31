@@ -5,30 +5,39 @@
     <title>Edit Blog</title>
 </head>
 <body>
-<fieldset>
-    <legend>Edit Blog</legend>
-    <p><a href="/blogs">Blog List</a></p>
-    <th:block th:if="${message}">
-        <p th:text="${message}"></p>
-    </th:block>
-    <form th:action="@{/edit-blog}" th:object="${blog}" method="post">
-        <input type="hidden" name="id" th:field="*{id}">
-        <table>
-            <tr>
-                <td>Name</td>
-                <td><input type="text" th:field="*{name}"></td>
-            </tr>
-            <tr>
-                <td>Content</td>
-                <td><input type="text" th:field="*{content}"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Update customer"></td>
-            </tr>
-        </table>
-
-    </form>
-</fieldset>
+<p>
+    <a href="/blogs">Blog List</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/edit-blog}" th:object="${blog}" method="post">
+    <input th:type="hidden" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Author:</td>
+            <td><input type="text" th:field="*{author}"></td>
+        </tr>
+        <tr>
+            <td>Content:</td>
+            <td><input type="text" th:field="*{content}"></td>
+        </tr>
+        <tr>
+            <td>Catagory:</td>
+            <td>
+                <select name="catagory">
+                    <option th:each="p : ${catagories}"
+                            th:value="${p.id}"
+                            th:text="${p.name}"
+                            th:selected="(${p.id} == *{catagory.id})"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Update blog"></td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>

@@ -2,28 +2,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create New Blog</title>
 </head>
 <body>
-<h1>
-    Create Blog
-</h1>
 <p>
     <a href="/blogs">Blog List</a>
 </p>
+<h1>Create new blog</h1>
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
-</body>
 <form th:action="@{/create-blog}" th:object="${blog}" method="post">
     <table>
         <tr>
-            <td>Name:</td>
-            <td><input type="text" th:field="*{name}"/></td>
+            <td>Author:</td>
+            <td><input type="text" th:field="*{author}"></td>
         </tr>
         <tr>
             <td>Content:</td>
-            <td><input type="text" th:field="*{content}"/></td>
+            <td><input type="text" th:field="*{content}"></td>
+        </tr>
+        <tr>
+            <td>Catagory:</td>
+            <td>
+                <select th:field="*{catagory}">
+                    <option th:each="p:${catagories}" th:value="${p.id}" th:text="${p.name}"></option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -31,4 +36,5 @@
         </tr>
     </table>
 </form>
+</body>
 </html>

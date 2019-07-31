@@ -8,20 +8,27 @@ public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
+    private String author;
     private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "catagory_id")
+    private Catagory catagory;
 
     public Blog() {
     }
 
-    public Blog(String name, String content) {
-        this.name = name;
+    public Blog(String author, String content) {
+        this.author = author;
         this.content = content;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Blog[id=%d, firstName='%s', lastName='%s']", id, name, content);
+    public Catagory getCatagory() {
+        return (catagory == null) ? new Catagory() : catagory;
+    }
+
+    public void setCatagory(Catagory catagory) {
+        this.catagory = catagory;
     }
 
     public Long getId() {
@@ -32,12 +39,12 @@ public class Blog {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getContent() {
@@ -46,5 +53,10 @@ public class Blog {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "Blog[id= " + id + ", author = " + author + ", content = " + content;
     }
 }

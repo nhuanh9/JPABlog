@@ -5,26 +5,31 @@
     <title>Delete Blog</title>
 </head>
 <body>
+<p>
+    <a href="/blogs">Blog List</a>
+</p>
 <h1>Delete Blog</h1>
-<fieldset>
-    <legend>Are you sure?</legend>
-    <form th:action="@{/delete-blog}" method="post" th:object="${blog}">
-        <input type="hidden" name="id" th:field="*{id}">
-        <table>
-            <tr>
-                <td>Name</td>
-                <td th:text="${blog.getName()}"></td>
-            </tr>
-            <tr>
-                <td>Content</td>
-                <td th:text="${blog.getContent()}"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-        </table>
-    </form>
-</fieldset>
+<h3>Are you sure?</h3>
+<form th:action="@{/delete-blog}" th:object="${blog}" method="post">
+    <input th:type="hidden" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Author:</td>
+            <td th:text="${blog.author}"></td>
+        </tr>
+        <tr>
+            <td>Content:</td>
+            <td th:text="${blog.content}"></td>
+        </tr>
+        <tr>
+            <td>Catagory:</td>
+            <td th:text="${blog.catagory.name}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Delete Blog"></td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>
