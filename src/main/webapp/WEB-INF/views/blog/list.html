@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List Blog</title>
+    <title th:text="#{blog.title}"></title>
     <div>
         <a th:href="@{'/blogs'(page=${blogs.number - 1})}" th:if="${blogs.hasPrevious()}">Previous</a>
         <span th:text="${blogs.number + 1}"></span>/<span th:text="${blogs.totalPages}"></span>
@@ -10,6 +10,8 @@
     </div>
 </head>
 <body>
+<h1 th:text="#{blog.heading}"></h1>
+Language: <a href="?lang=en">English</a> | <a href="?lang=haw">Hawaii</a>
 <p>
     <a href="/create-blog">Create new blog</a>
 </p>
@@ -23,8 +25,8 @@
         <th>Author</th>
         <th>Content</th>
         <th>Catagory</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <td th:text="#{blog.edit_label}"></td>
+        <td th:text="#{blog.delete_label}"></th>
     </tr>
     <th:block th:each="blog:${blogs}">
         <tr>
