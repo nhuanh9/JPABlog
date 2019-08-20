@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -57,6 +58,8 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         this.applicationContext = applicationContext;
     }
 
+    // Auto...
+
     @Bean
     public BlogService blogService() {
         return new BlogServiceImpl();
@@ -66,6 +69,8 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     public CatagoryService catagoryService() {
         return new CatagoryServiceImpl();
     }
+
+    //Thymleaf
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
@@ -90,6 +95,8 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         viewResolver.setTemplateEngine(templateEngine());
         return viewResolver;
     }
+
+    // Database
 
     @Bean
     @Qualifier(value = "entityManager")
@@ -138,6 +145,8 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         registry.addFormatter(new CatagoryFormatter(applicationContext.getBean(CatagoryService.class)));
     }
 
+    //i18n
+
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
@@ -157,5 +166,10 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
         localeResolver.setDefaultLocale(new Locale("en"));
         return localeResolver;
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
 }
